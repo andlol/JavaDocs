@@ -10,12 +10,15 @@
 
 package ro.teamnet.z2h.web;
 
+
+import ro.teamnet.z2h.file.LogFileWriter;
+
 import javax.servlet.*;
 import java.io.IOException;
+import java.util.Enumeration;
 
 public class HeadersLogFilter implements Filter {
 
-    @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
     }
@@ -28,15 +31,22 @@ public class HeadersLogFilter implements Filter {
      * @throws IOException
      * @throws ServletException
      */
-    @Override
+
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-       //TODO completeaza cu cod astfel incat sa poti loga headerele de pe request intr-un fisier.
-       // Clasa care va scrie intr-un fisier de log este LogFileWriter metoda   logHeader
+        //TODO completeaza cu cod astfel incat sa poti loga headerele de pe request intr-un fisier.
+        // Clasa care va scrie intr-un fisier de log este LogFileWriter metoda   logHeader
+        Enumeration<String> en=request.getParameterNames();
+
+        while(en.hasMoreElements()){
+            String s1=(String)en.nextElement();
+            String val=request.getParameter(s1);
+            LogFileWriter.logHeader(s1,val);
+        }
 
         chain.doFilter(request, response);
     }
 
-    @Override
+
     public void destroy() {
 
     }

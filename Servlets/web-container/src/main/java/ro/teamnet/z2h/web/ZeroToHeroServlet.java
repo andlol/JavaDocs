@@ -22,6 +22,7 @@ public class ZeroToHeroServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+<<<<<<< HEAD
         String res=handleRequest(req);
         PrintWriter out = resp.getWriter();
         out.println(res);
@@ -34,6 +35,13 @@ public class ZeroToHeroServlet extends HttpServlet {
         String response="Hello <b>"+x+" "+y+"</b>! Enjoy Zero To Hero!!!";
 
         return response;
+=======
+        resp.getWriter().write(handleRequest(req));
+    }
+
+    private String handleRequest(HttpServletRequest req){
+        return "Hello <b> "+ req.getParameter("firstName") +" "+ req.getParameter("lastName") +"</b>! Enjoy Zero To Hero!!!";
+>>>>>>> a1fa891976324a8f77438521b9887049a5988bb4
     }
 
 }
